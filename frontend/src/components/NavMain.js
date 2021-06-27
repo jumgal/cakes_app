@@ -1,8 +1,19 @@
 import React, { Fragment } from "react";
-import { Container, Navbar, Nav } from "react-bootstrap";
+import { useSelector, useDispatch } from 'react-redux';
+import { userLogoutAction } from '../actions/userActions';
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
 const NavMain = () => {
+
+  const { userInfo } = useSelector(state => state.userLogin)
+
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    dispatch(userLogoutAction())
+  }
+
   return (
     <Fragment>
       <Navbar bg="secondary" variant="dark" className="mb-4">
@@ -17,12 +28,22 @@ const NavMain = () => {
             <LinkContainer to="/cart">
               <Nav.Link>CART</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/login">
-              <Nav.Link>LOGIN</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/signup">
-              <Nav.Link>SIGN UP</Nav.Link>
-            </LinkContainer>
+            {userInfo ? (
+              <NavDropdown title={userInfo.name.toUpperCase()} id="username">
+                <LinkContainer to="/profile">
+                  <NavDropdown.Item>Profile</NavDropdown.Item>
+                </LinkContainer>
+                <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+              </NavDropdown>
+            ) :
+              <Nav><LinkContainer to="/login">
+                <Nav.Link>LOGIN</Nav.Link>
+              </LinkContainer>
+                <LinkContainer to="/signup">
+                  <Nav.Link>SIGN UP</Nav.Link>
+                </LinkContainer>
+              </Nav>
+            }
           </Nav>
         </Container>
       </Navbar>
