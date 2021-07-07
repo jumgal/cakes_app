@@ -48,7 +48,7 @@ const LoginScreen = ({ location, history }) => {
                             ...login,
                             email: e.target.value
                         })}
-                        type="email" placeholder="Enter email" />
+                        type="email" placeholder="Enter email" required />
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                     </Form.Text>
@@ -62,7 +62,7 @@ const LoginScreen = ({ location, history }) => {
                             ...login,
                             password: e.target.value
                         })}
-                        type="password" placeholder="Password" />
+                        type="password" placeholder="Password" required />
                 </Form.Group>
                 <Button variant="primary" type="submit">
                     Sign In

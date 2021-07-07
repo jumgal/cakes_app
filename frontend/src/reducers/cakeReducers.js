@@ -2,10 +2,29 @@ import {
   CAKE_LIST_SUCCESS,
   CAKE_LIST_ERROR,
   CAKE_LIST_REQUEST,
-  SINGLE_CAKE_REQUEST,
-  SINGLE_CAKE_SUCCESS,
-  SINGLE_CAKE_ERROR,
-} from "../constants/productTypes";
+  CAKE_DETAILS_REQUEST,
+  CAKE_DETAILS_SUCCESS,
+  CAKE_DETAILS_ERROR,
+  CAKE_DELETE_REQUEST,
+  CAKE_DELETE_SUCCESS,
+  CAKE_DELETE_FAIL,
+  CAKE_CREATE_REQUEST,
+  CAKE_CREATE_SUCCESS,
+  CAKE_CREATE_FAIL,
+  CAKE_CREATE_RESET,
+  CAKE_CREATE_REVIEW_REQUEST,
+  CAKE_CREATE_REVIEW_SUCCESS,
+  CAKE_CREATE_REVIEW_FAIL,
+  CAKE_CREATE_REVIEW_RESET,
+  CAKE_TOP_REQUEST,
+  CAKE_TOP_SUCCESS,
+  CAKE_TOP_FAIL,
+  CAKE_UPDATE_REQUEST,
+  CAKE_UPDATE_SUCCESS,
+  CAKE_UPDATE_FAIL,
+  CAKE_UPDATE_RESET
+
+} from "../constants/cakeConstants";
 
 const initialState = {
   cakes: [],
@@ -34,22 +53,22 @@ export const cakeReducer = (state = initialState, action) => {
   }
 };
 
-export const singleCakeReducer = (
+export const cakeDetailsReducer = (
   state = { cake: {}, reviews: [] },
   action
 ) => {
   switch (action.type) {
-    case SINGLE_CAKE_REQUEST:
+    case CAKE_DETAILS_REQUEST:
       return {
         loading: true,
         ...state,
       };
-    case SINGLE_CAKE_SUCCESS:
+    case CAKE_DETAILS_SUCCESS:
       return {
         loading: false,
         cake: action.payload,
       };
-    case SINGLE_CAKE_ERROR:
+    case CAKE_DETAILS_ERROR:
       return {
         loading: false,
         error: action.payload,
@@ -59,3 +78,75 @@ export const singleCakeReducer = (
       return state;
   }
 };
+
+export const cakeDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case CAKE_DELETE_REQUEST:
+      return { loading: true }
+    case CAKE_DELETE_SUCCESS:
+      return { loading: false, success: true }
+    case CAKE_DELETE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+export const cakeCreateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case CAKE_CREATE_REQUEST:
+      return { loading: true }
+    case CAKE_CREATE_SUCCESS:
+      return { loading: false, success: true, cake: action.payload }
+    case CAKE_CREATE_FAIL:
+      return { loading: false, error: action.payload }
+    case CAKE_CREATE_RESET:
+      return {}
+    default:
+      return state
+  }
+}
+
+export const cakeUpdateReducer = (state = { cake: {} }, action) => {
+  switch (action.type) {
+    case CAKE_UPDATE_REQUEST:
+      return { loading: true }
+    case CAKE_UPDATE_SUCCESS:
+      return { loading: false, success: true, cake: action.payload }
+    case CAKE_UPDATE_FAIL:
+      return { loading: false, error: action.payload }
+    case CAKE_UPDATE_RESET:
+      return { cake: {} }
+    default:
+      return state
+  }
+}
+
+export const cakeReviewCreateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case CAKE_CREATE_REVIEW_REQUEST:
+      return { loading: true }
+    case CAKE_CREATE_REVIEW_SUCCESS:
+      return { loading: false, success: true }
+    case CAKE_CREATE_REVIEW_FAIL:
+      return { loading: false, error: action.payload }
+    case CAKE_CREATE_REVIEW_RESET:
+      return {}
+    default:
+      return state
+  }
+}
+
+export const cakeTopRatedReducer = (state = { products: [] }, action) => {
+  switch (action.type) {
+    case CAKE_TOP_REQUEST:
+      return { loading: true, products: [] }
+    case CAKE_TOP_SUCCESS:
+      return { loading: false, products: action.payload }
+    case CAKE_TOP_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+

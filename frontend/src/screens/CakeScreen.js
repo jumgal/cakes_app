@@ -30,7 +30,7 @@ const CakeScreen = ({ history, match }) => {
 
   const dispatch = useDispatch();
 
-  const single_cake = useSelector((state) => state.single_cake);
+  const single_cake = useSelector((state) => state.cakeDetails);
 
   const { loading, cake, error } = single_cake;
 
