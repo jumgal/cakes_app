@@ -6,7 +6,7 @@ import {
     USER_DETAILS_FAIL, USER_DETAILS_RESET,
     USER_UPDATE_PROFILE_REQUEST,
     USER_UPDATE_PROFILE_SUCCESS,
-    USER_UPDATE_PROFILE_RESET,
+    // USER_UPDATE_PROFILE_RESET,
     USER_UPDATE_PROFILE_FAIL,
     USER_LIST_FAIL,
     USER_LIST_SUCCESS,
@@ -18,7 +18,7 @@ import {
     USER_UPDATE_REQUEST,
     USER_UPDATE_SUCCESS,
     USER_UPDATE_FAIL,
-    USER_UPDATE_RESET
+    // USER_UPDATE_RESET
 }
 
     from '../constants/userConstants'
@@ -54,7 +54,6 @@ const userLoginAction = (email, password) => async dispatch => {
                     : error.message,
         });
 
-        console.log(error.response.data.message)
     }
 }
 
@@ -291,7 +290,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
 
         dispatch({ type: USER_DETAILS_SUCCESS, payload: data })
 
-        // dispatch({ type: USER_DETAILS_RESET })
+        dispatch({ type: USER_DETAILS_RESET })
     } catch (error) {
         const message =
             error.response && error.response.data.message

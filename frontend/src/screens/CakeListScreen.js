@@ -13,12 +13,11 @@ import {
 import { CAKE_CREATE_RESET } from '../constants/cakeConstants'
 
 const CakeListScreen = ({ history, match }) => {
-  const pageNumber = match.params.pageNumber || 1
 
   const dispatch = useDispatch()
 
   const cakesList = useSelector((state) => state.cakesList)
-  const { loading, error, cakes, page, pages } = cakesList
+  const { loading, error, cakes } = cakesList
 
   const cakeDelete = useSelector((state) => state.cakeDelete)
   const {

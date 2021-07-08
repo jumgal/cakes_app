@@ -13,18 +13,10 @@ import {
   CAKE_CREATE_REQUEST,
   CAKE_CREATE_SUCCESS,
   CAKE_CREATE_FAIL,
-  CAKE_CREATE_RESET,
-  CAKE_CREATE_REVIEW_REQUEST,
-  CAKE_CREATE_REVIEW_SUCCESS,
-  CAKE_CREATE_REVIEW_FAIL,
-  CAKE_CREATE_REVIEW_RESET,
-  CAKE_TOP_REQUEST,
-  CAKE_TOP_SUCCESS,
-  CAKE_TOP_FAIL,
   CAKE_UPDATE_REQUEST,
   CAKE_UPDATE_SUCCESS,
   CAKE_UPDATE_FAIL,
-  CAKE_UPDATE_RESET
+  // CAKE_UPDATE_RESET
 } from "../constants/cakeConstants";
 
 
@@ -190,67 +182,6 @@ export const updateCake = (cake) => async (dispatch, getState) => {
     dispatch({
       type: CAKE_UPDATE_FAIL,
       payload: message,
-    })
-  }
-}
-
-export const createCakeReview = (productId, review) => async (
-  dispatch,
-  getState
-) => {
-  try {
-    dispatch({
-      type: CAKE_CREATE_REVIEW_REQUEST,
-    })
-
-    const {
-      userLogin: { userInfo },
-    } = getState()
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    }
-
-    await axios.post(`/api/cakes/${productId}/reviews`, review, config)
-
-    dispatch({
-      type: CAKE_CREATE_REVIEW_SUCCESS,
-    })
-  } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
-    if (message === 'Not authorized, token failed') {
-      dispatch(userLogoutAction())
-    }
-    dispatch({
-      type: CAKE_CREATE_REVIEW_FAIL,
-      payload: message,
-    })
-  }
-}
-
-export const listTopCakes = () => async (dispatch) => {
-  try {
-    dispatch({ type: CAKE_TOP_REQUEST })
-
-    const { data } = await axios.get(`/api/cakes/top`)
-
-    dispatch({
-      type: CAKE_TOP_SUCCESS,
-      payload: data,
-    })
-  } catch (error) {
-    dispatch({
-      type: CAKE_TOP_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
     })
   }
 }

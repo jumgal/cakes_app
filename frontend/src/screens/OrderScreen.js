@@ -76,7 +76,7 @@ const OrderScreen = ({ match, history }) => {
                 setSdkReady(true)
             }
         }
-    }, [dispatch, orderId, successPay, successDeliver, order])
+    }, [history, userInfo, dispatch, orderId, successPay, successDeliver, order])
 
 
     // useEffect(() => {

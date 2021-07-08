@@ -28,7 +28,6 @@ const CartScreen = ({ match, location, history }) => {
 
     const checkoutHandler = () => {
         history.push("/login?redirect=shipping");
-        console.log("checkout");
     };
 
     return (
@@ -91,10 +90,10 @@ const CartScreen = ({ match, location, history }) => {
                         <ListGroup.Item>
                             <h2>
                                 Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
-                    items
-                  </h2>
-                  $
-                  {cartItems
+                                items
+                            </h2>
+                            $
+                            {cartItems
                                 .reduce((acc, item) => acc + item.qty * item.price, 0)
                                 .toFixed(2)}
                         </ListGroup.Item>
@@ -106,7 +105,7 @@ const CartScreen = ({ match, location, history }) => {
                                 onClick={checkoutHandler}
                             >
                                 Proceed Top Checkout
-                  </Button>
+                            </Button>
                         </ListGroup.Item>
                     </ListGroup>
                 </Card>

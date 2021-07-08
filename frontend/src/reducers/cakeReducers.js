@@ -12,13 +12,6 @@ import {
   CAKE_CREATE_SUCCESS,
   CAKE_CREATE_FAIL,
   CAKE_CREATE_RESET,
-  CAKE_CREATE_REVIEW_REQUEST,
-  CAKE_CREATE_REVIEW_SUCCESS,
-  CAKE_CREATE_REVIEW_FAIL,
-  CAKE_CREATE_REVIEW_RESET,
-  CAKE_TOP_REQUEST,
-  CAKE_TOP_SUCCESS,
-  CAKE_TOP_FAIL,
   CAKE_UPDATE_REQUEST,
   CAKE_UPDATE_SUCCESS,
   CAKE_UPDATE_FAIL,
@@ -122,31 +115,4 @@ export const cakeUpdateReducer = (state = { cake: {} }, action) => {
   }
 }
 
-export const cakeReviewCreateReducer = (state = {}, action) => {
-  switch (action.type) {
-    case CAKE_CREATE_REVIEW_REQUEST:
-      return { loading: true }
-    case CAKE_CREATE_REVIEW_SUCCESS:
-      return { loading: false, success: true }
-    case CAKE_CREATE_REVIEW_FAIL:
-      return { loading: false, error: action.payload }
-    case CAKE_CREATE_REVIEW_RESET:
-      return {}
-    default:
-      return state
-  }
-}
-
-export const cakeTopRatedReducer = (state = { products: [] }, action) => {
-  switch (action.type) {
-    case CAKE_TOP_REQUEST:
-      return { loading: true, products: [] }
-    case CAKE_TOP_SUCCESS:
-      return { loading: false, products: action.payload }
-    case CAKE_TOP_FAIL:
-      return { loading: false, error: action.payload }
-    default:
-      return state
-  }
-}
 
